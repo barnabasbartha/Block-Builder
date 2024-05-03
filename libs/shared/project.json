@@ -1,0 +1,46 @@
+{
+  "name": "shared",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared"],
+      "options": {
+        "jestConfig": "libs/shared/jest.config.ts",
+        "passWithNoTests": true,
+        "watch": true
+      },
+      "configurations": {
+        "default": {
+          "watch": true
+        },
+        "ci": {
+          "watch": false,
+          "ci": true,
+          "runInBand": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/**/*.{ts,js}"],
+        "fix": true
+      }
+    },
+    "pretty-quick": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx pretty-quick --staged"
+          }
+        ]
+      }
+    }
+  }
+}

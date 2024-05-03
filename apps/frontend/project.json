@@ -1,0 +1,103 @@
+{
+  "name": "frontend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/frontend",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "swc",
+        "outputPath": "dist/apps/frontend",
+        "index": "apps/frontend/public/index.html",
+        "baseHref": "/",
+        "main": "apps/frontend/src/index.tsx",
+        "tsConfig": "apps/frontend/tsconfig.app.json",
+        "assets": ["apps/frontend/public"],
+        "styles": [],
+        "scripts": []
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/src/environments/environments.ts",
+              "with": "apps/frontend/src/environments/environments.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "frontend:build",
+        "hmr": true,
+        "port": 3000,
+        "open": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "frontend:build:development"
+        },
+        "production": {
+          "buildTarget": "frontend:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/frontend"],
+      "options": {
+        "jestConfig": "apps/frontend/jest.config.ts",
+        "passWithNoTests": true,
+        "watch": true
+      },
+      "configurations": {
+        "default": {
+          "watch": true
+        },
+        "ci": {
+          "watch": false,
+          "ci": true,
+          "runInBand": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/frontend/**/*.{ts,tsx,js,jsx}"],
+        "fix": true
+      }
+    },
+    "pretty-quick": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx pretty-quick --since main"
+          }
+        ]
+      }
+    }
+  }
+}

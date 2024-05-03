@@ -1,0 +1,98 @@
+{
+  "root": true,
+  "ignorePatterns": ["!**/*"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import", "prefer-arrow-functions"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "rules": {
+    "import/no-anonymous-default-export": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [".*"]
+      }
+    ],
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "warn",
+      {
+        "classPropertiesAllowed": false,
+        "disallowPrototype": false,
+        "returnStyle": "implicit",
+        "singleReturnOnly": false
+      }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      "FunctionExpression",
+      "FunctionDeclaration"
+    ],
+    "import/no-default-export": [2],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "quotes": [2, "single"],
+    "max-lines": 0,
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "node/no-unpublished-import": 0,
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          ["external"],
+          "builtin",
+          "internal",
+          "index",
+          ["sibling", "parent"]
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@frontend/**",
+            "group": "builtin"
+          },
+          {
+            "pattern": "@backend/**",
+            "group": "builtin"
+          },
+          {
+            "pattern": "@shared/**",
+            "group": "internal"
+          }
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*stories.tsx"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
+}

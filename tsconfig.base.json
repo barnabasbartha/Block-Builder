@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "dist/out-tsc",
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@frontend/*": ["apps/frontend/src/*"],
+      "@shared/*": ["libs/shared/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
