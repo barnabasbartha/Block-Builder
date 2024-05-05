@@ -10,6 +10,7 @@
     "plugin:import/typescript"
   ],
   "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
     "import/no-anonymous-default-export": "off",
     "no-restricted-imports": [
       "error",
@@ -25,11 +26,6 @@
         "returnStyle": "implicit",
         "singleReturnOnly": false
       }
-    ],
-    "no-restricted-syntax": [
-      "error",
-      "FunctionExpression",
-      "FunctionDeclaration"
     ],
     "import/no-default-export": [2],
     "@typescript-eslint/no-unused-vars": [
