@@ -1,7 +1,7 @@
-import { injectable } from 'inversify';
 import { Subject } from 'rxjs';
+import { Singleton } from 'typescript-ioc';
 
-@injectable()
+@Singleton
 export class MainWrapper {
   private readonly $onCanvasInit = new Subject<HTMLCanvasElement>();
   readonly onCanvasInit = this.$onCanvasInit.pipe();

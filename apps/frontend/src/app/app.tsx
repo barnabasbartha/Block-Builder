@@ -1,25 +1,26 @@
 import { MainService } from '@frontend/app/main/main.service';
-import { Container } from 'inversify';
-import { useState } from 'react';
+import { useRef } from 'react';
 import { styled } from 'styled-components';
+import { Container } from 'typescript-ioc';
 
 const StyledCanvas = styled.canvas`
-  width: 100vw;
-  height: 100vh;
+  width: 100vw !important;
+  height: 100vh !important;
 `;
 
+const main = Container.get(MainService);
+
 export const App = () => {
-  const [main] = useState(() => {
-    const container = new Container({
-      defaultScope: 'Singleton',
-      autoBindInjectable: true,
-      skipBaseClassChecks: true,
-    });
-    return container.get(MainService);
-  });
+  const initRef = useRef<boolean>(false);
   return (
     <>
-      <StyledCanvas ref={(ref) => main.init(ref)} />
+      <StyledCanvas
+        ref={(ref) => {
+          if (initRef.current) return;
+          initRef.current = true;
+          main.init(ref);
+        }}
+      />
     </>
   );
 };
